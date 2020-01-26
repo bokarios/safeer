@@ -8,7 +8,7 @@
 						<div class="row text-center">
 							<div class="col-12">
 								<h1 class="text-white">
-									<i class="fa fa-bus"></i> سفرك علينا
+									<i class="fa fa-bus"></i> سافر
 								<h1>
 								<form class="mt-5" method="POST" action="/auth/login">
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">

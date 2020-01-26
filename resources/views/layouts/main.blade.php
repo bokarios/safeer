@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>سفرك علينا</title>
+      <title>سافر</title>
       <!-- Favicon -->
       {{-- <link href="" rel="icon" type="image/png"> --}}
       <!-- Icons -->
@@ -38,7 +38,7 @@
   <script>
     $(document).ready(function(){
       $('#myTab a[href="#{{old('tab')}}"]').tab('show')
-    })
+    });
   </script>
  
 </body>
