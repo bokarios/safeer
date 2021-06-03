@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,7 @@
 */
 
 /* Home Route */
+
 Route::get('/', 'PagesController@index');
 /* Add Admins Route */
 Route::post('/admins/add', 'AdminsController@store');
@@ -82,10 +84,9 @@ Route::get('/delayed/excel', 'MyController@delayedExcel');
 Route::get('/trips/excel', 'MyController@tripExcel');
 
 /* Authenticated users */
-Route::group(['middleware' => 'auth'], function()
-{
-	/* Admins Panel Route */
-	Route::get('/panel', 'AdminsController@index');
+Route::group(['middleware' => 'auth'], function () {
+    /* Admins Panel Route */
+    Route::get('/panel', 'AdminsController@index');
 });
 
 // Route::([

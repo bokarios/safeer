@@ -1,16 +1,21 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php
+
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Controllers\Auth\Session;
+use App\User;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
+use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Registration & Login Controller
 	|--------------------------------------------------------------------------
@@ -24,22 +29,22 @@ class AuthController extends Controller {
     use RegistersUsers;
     use AuthenticatesUsers;
 
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
-	 * @return void
-	 */
-	public function __construct(Guard $auth, Registrar $registrar)
-	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
+    /**
+     * Create a new authentication controller instance.
+     *
+     * @param  \Illuminate\Contracts\Auth\Guard  $auth
+     * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
+     * @return void
+     */
+    public function __construct(Guard $auth, Registrar $registrar)
+    {
+        $this->auth = $auth;
+        $this->registrar = $registrar;
 
-		$this->middleware('guest', ['except' => 'getLogout']);
-	}
+        $this->middleware('guest', ['except' => 'getLogout']);
+    }
 
-	/**
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -49,7 +54,7 @@ class AuthController extends Controller {
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -64,23 +69,24 @@ class AuthController extends Controller {
     {
         return User::create([
             'name' => $data['name'],
-			'email' => $data['email'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
     /* Login get post methods */
-    protected function getLogin() {
+    protected function getLogin()
+    {
         return View('auth.login');
     }
 
-    protected function postLogin(LoginRequest $request) 
+    protected function postLogin(LoginRequest $request)
     {
         if ($this->auth->attempt($request->only('email', 'password'))) {
             return redirect('/panel')->with('success', 'مرحبا بك في لوحة التحكم');
         }
 
-        return back()->with('warning', 'البريد الالكترني أو كلمة المرور خطأ');;
+        return back()->with('warning', 'البريد الالكترني أو كلمة المرور خطأ');
     }
 
     /**

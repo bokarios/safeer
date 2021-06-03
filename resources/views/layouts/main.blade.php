@@ -12,8 +12,8 @@
       <!-- Animation CSS -->
       <link rel="stylesheet" href="{{asset('css/animate.css')}}">
       <!-- Argon CSS -->
+	  <link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
       <link type="text/css" href="{{asset('admins/css/argon.css')}}" rel="stylesheet">
-      <link type="text/css" href="{{asset('css/app.css')}}" rel="stylesheet">
       <!-- Argon Scripts -->
       <!-- Core -->
       <script src="{{asset('admins/vendor/jquery/dist/jquery.min.js')}}"></script>

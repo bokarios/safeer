@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -50,7 +52,7 @@ class LoginController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -65,17 +67,18 @@ class LoginController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-			'email' => $data['email'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
     /* Login get post methods */
-    protected function getLogin() {
+    protected function getLogin()
+    {
         return View('auth.login');
     }
 
-    protected function postLogin(LoginRequest $request) 
+    protected function postLogin(LoginRequest $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             return redirect('/panel')->with('success', 'مرحبا بك في لوحة التحكم');
